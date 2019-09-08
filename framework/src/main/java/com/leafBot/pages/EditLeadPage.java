@@ -1,18 +1,32 @@
 package com.leafBot.pages;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
+
 import com.leafBot.testng.api.base.ProjectSpecificMethods;
 
 public class EditLeadPage extends ProjectSpecificMethods{
+	
+	public EditLeadPage() {
+		PageFactory.initElements(driver, this);
+	}
+	
+	@FindBy(how=How.ID,using ="updateLeadForm_companyName") WebElement eleCompName;
 	public EditLeadPage clearCompanyName() {
-		driver.findElementById("updateLeadForm_companyName").clear();
+		clear(eleCompName);
 		return this;
 	}
+	
 	public EditLeadPage enterNewCompanyName(String newCompName) {
-		driver.findElementById("updateLeadForm_companyName").sendKeys(newCompName);
+		clearAndType(eleCompName,newCompName);
 		return this;
 	}
+	
+	@FindBy(how=How.XPATH,using="//input[@class='smallSubmit'][1]") WebElement eleClickUpdate;
 	public ViewLead clickUpdate() {
-		driver.findElementByXPath("//input[@class='smallSubmit'][1]").click();
+		click(eleClickUpdate);
 		return new ViewLead();
 	}
 	
