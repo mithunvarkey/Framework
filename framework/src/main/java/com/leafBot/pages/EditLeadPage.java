@@ -24,9 +24,9 @@ public class EditLeadPage extends ProjectSpecificMethods{
 		return this;
 	}
 	
-	@FindBy(how=How.XPATH,using="//input[@class='smallSubmit'][1]") WebElement eleClickUpdate;
+	@FindBy(how=How.XPATH,using="//input[@class='smallSubmit'][1]") WebElement eleClickUpdatee;
 	public ViewLead clickUpdate() {
-		click(eleClickUpdate);
+		click(eleClickUpdatee);
 		return new ViewLead();
 	}
 	
