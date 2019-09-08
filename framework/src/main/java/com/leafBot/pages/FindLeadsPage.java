@@ -1,27 +1,35 @@
 package com.leafBot.pages;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
+
 import com.leafBot.testng.api.base.ProjectSpecificMethods;
 
 public class FindLeadsPage extends ProjectSpecificMethods{
+	public FindLeadsPage() {
+		PageFactory.initElements(driver, this);
+	}
+	@FindBy(how=How.XPATH,using="//label[text()='Lead ID:']/following::div/input") WebElement eleLeadId;
 	public FindLeadsPage enterLeadId(String lead)
 	{
-		driver.findElementByXPath("//label[text()='Lead ID:']/following::div/input").sendKeys(lead);
+		clearAndType(eleLeadId,lead);
 		return this;
 	}
+	@FindBy(how=How.XPATH,using="//button[text()='Find Leads']") WebElement eleClickFindLeads;
 	public FindLeadsPage clickFindLeads() throws InterruptedException {
-		driver.findElementByXPath("//button[text()='Find Leads']").click();
+		click(eleClickFindLeads);
 		Thread.sleep(3000);
 		return this;
 	}
+	@FindBy(how=How.XPATH,using="//div[@class='x-paging-info']") WebElement eleFindLeadText;
 	public void verifyLeads() {
-		if(driver.findElementByXPath("//div[@class='x-paging-info']").getText().equals("No records to display")) {
-			System.out.println("Validation success");
-		}
-		else System.out.println("Validation failed");
-
+		verifyExactText(eleFindLeadText,"No records found");
 	}
+	@FindBy(how=How.XPATH,using="//span[text()='Email']") WebElement eleEmail;
 	public FindLeadsPage clickEmail() {
-		driver.findElementByXPath("//span[text()='Email']").click();
+		click(eleEmail);
 		return this;
 	}
 	public FindLeadsPage enterEmail(String email) {
